@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\AdminCategoryController;
 
 
 /*
@@ -75,5 +76,9 @@ Route::get('/dashboard', function() {
     return view('dashboard.index');
 })->middleware('auth');
 
-Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
+Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth'); // gabisa diakses, harus login dulu
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+
+// ->middleware('admin'), middleware ini udah update dari kernel.php, di kernel dinamain admin yang diambil dari middleware php artisan make:middleware IsAdmin
+// gapake middleware juga gapapa karena udah pake gate, GATE JAUH LEBIH FLEKSIBEL
+Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin'); // pengecualian untuk categories.show nya
