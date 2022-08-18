@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\ForgotPasswordController;
 
 
 /*
@@ -66,6 +67,19 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
+
+// Forgot Password Link Request
+Route::get('/forgot-password', [ForgotPasswordController::class, 'forgot'])->middleware('guest')->name('password_request'); // pake route('lupa-password') di page login nya
+// Form Handling Email untuk reset password
+Route::post('/forgot-password', [ForgotPasswordController::class, 'password'])->middleware('guest')->name('password_email');
+
+// Reset passwordnya
+Route::get('/reset-password/{token}', function ($token) {
+    return view('login.reset-password', ['token' => $token, 'title' => 'Reset Password', 'active' => 'login']);
+})->middleware('guest')->name('password.reset');
+// Form Handling Password Baru
+Route::post('/reset-password', [ForgotPasswordController::class, 'password_update'])->middleware('guest')->name('password_update');
+
 
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');

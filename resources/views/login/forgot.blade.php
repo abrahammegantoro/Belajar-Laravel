@@ -19,8 +19,8 @@
             @endif
 
             <main class="form-signin w-100 m-auto">
-                <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
-                <form action="/login" method="post">
+                <h1 class="h3 mb-3 fw-normal text-center">Forgot Password</h1>
+                <form action="{{ route('password_email') }}" method="post"> {{--  ini actionnya samain kayak yang di routes web.php --}}
                     @csrf
                     <div class="form-floating">
                         <label for="email">Email address</label>
@@ -32,16 +32,8 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-floating">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                    </div>
-                    <div class="form-floating">
-                        <label for="password"><a href="{{ route('password_request') }}">Forgot Password?</a></label>
-                    </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+                    <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Reset Password</button>
                 </form>
-                <small class="d-block text-center mt-2">Not Registered? <a href="/register">Register Now!</a></small>
             </main>
         </div>
     </div>
