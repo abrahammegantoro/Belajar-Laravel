@@ -12,20 +12,26 @@ class PostController extends Controller
     public function index() {
 
         $title = '';
+
+        // INI UNTUK NANGKEP SLUG KALAU USER MENCET NAMA CATEGORY ATAU NAMA USER JADI MUNCUL POST YANG BERKAITAN
+        // Kalau ada request category tertentu, title berubah, ini yang dikirim adalah slugnya, cara kirim ada di file categories.blade.php
         if(request('category')) {
-            $category = Category::firstWhere('slug', request('category'));
+            $category = Category::firstWhere('slug', request('category')); // dimana slug sama dengan request category yg dipilih
             $title = "in " . $category->name;
         } 
         
+        // Kalau ada request user tertentu
         if(request('user')) {
             $user = User::firstWhere('id', request('user'));
             $title = "by " . $user->name;
         }
 
+        // return file posts
         return view('posts',[ // return file posts.blade.php
             "title" => "All Posts " . $title,
             "active" => "posts",
-            "p" => Post::latest()->filter(request(['search','category','user']))->paginate(5)->withQueryString() // all nanti fungsi untuk mendapatkan semua data posts
+            "p" => Post::latest()->filter(request(['search','category','user']))->paginate(5)->withQueryString() // filter itu ambil dari scopeFilter di model, kalau gaada filter yauda all post
+            // latest untuk ngambil dari yang paling terakhir, request itu sesuai masukkan, paginate untuk pagination
         ]);
     }
 

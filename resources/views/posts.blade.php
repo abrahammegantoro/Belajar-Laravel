@@ -8,13 +8,17 @@
         <div class="col-md-6">
             <form action="/blog" method="get">
                 <!-- method get adalah method default, gaditulis juga gapapa -->
-                @if (request('category'))
+
+                @if (request('category')) {{--  Kalau user ngeklik salah satu category sehingga ingin memunculkan post dengan category tsb --}}
                     <input type="hidden" name="category" value="{{ request('category') }}">
                 @endif
-                @if (request('user'))
+                @if (request('user')) {{--  Kalau user ngeklik salah satu user sehingga ingin memunculkan post dengan user tsb --}}
                     <input type="hidden" name="user" value="{{ request('user') }}">
                 @endif
+
+            {{-- SEARCH BAR --}}
                 <div class="input-group mb-3">
+                    {{-- ini nambahin request yang udah ada d url, atau belum ada sama sekali juga gapapa, nanti otomatis nambah & di urlnya --}}
                     <input type="text" class="form-control" placeholder="Search..." name="search"
                         value={{ request('search') }}>
                     <button class="btn btn-danger" type="submit">Search</button>
@@ -24,10 +28,10 @@
     </div>
 
 
-    @if ($p->count())
+    @if ($p->count()) {{-- kalau ada p --}}
         <div class="card mb-3">
 
-            @if ($p[0]->image)
+            @if ($p[0]->image) {{--  kalau post pertama ada imagenya --}}
                 <img src="{{ asset('storage/' . $p[0]->image) }}" alt="{{ $p[0]->category->name }}" class="img-fluid mt-3">
             @else
                 <img src="https://source.unsplash.com/1200x400?{{ $p[0]->category->name }}" class="card-img-top"
@@ -38,6 +42,7 @@
 
                 <h2 class="card-title"><a href="/post/{{ $p[0]->slug }}" class="text-dark">{{ $p[0]->title }}</a></h2>
 
+                {{--  masuk ke request() --}}
                 <p>By : <a href="/blog?user={{ $p[0]->user->id }}">{{ $p[0]->user->name }}</a> in <a
                         href="/blog?category={{ $p[0]->category->slug }}">{{ $p[0]->category->name }}</a></p>
 

@@ -28,15 +28,16 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard');
         }
 
+        // kalau user ga terdaftar, return back, kirim pesan Login Failed melalui variable loginError
         return back()->with('loginError', 'Login Failed');
     }
 
     public function logout(Request $request){
         Auth::logout();
 
-        $request->session()->invalidate();
+        $request->session()->invalidate(); // matiin session
  
-        $request->session()->regenerateToken();
+        $request->session()->regenerateToken(); // regenerate token
     
         return redirect('/');
     }
