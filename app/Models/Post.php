@@ -12,6 +12,8 @@ class Post extends Model
 
     // biar bisa massive create
     protected $guarded = ['id'];
+
+    // eager loading, biar querynya ga banyak
     protected $with = ['user','category'];
 
     public function scopeFilter($query, array $filters) { // scopeFilter berarti cari sesuai filter yang dimasukkin

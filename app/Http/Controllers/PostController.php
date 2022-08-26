@@ -30,7 +30,8 @@ class PostController extends Controller
         return view('posts',[ // return file posts.blade.php
             "title" => "All Posts " . $title,
             "active" => "posts",
-            "p" => Post::latest()->filter(request(['search','category','user']))->paginate(5)->withQueryString() // filter itu ambil dari scopeFilter di model, kalau gaada filter yauda all post
+            "p" => Post::latest()->filter(request(['search','category','user']))->paginate(5)->withQueryString() // udah otomatis include with eager loading
+            // filter itu ambil dari scopeFilter di model, kalau gaada filter yauda all post
             // latest untuk ngambil dari yang paling terakhir, request itu sesuai masukkan, paginate untuk pagination
         ]);
     }
