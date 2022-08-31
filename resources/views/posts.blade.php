@@ -48,7 +48,7 @@
 
                 <p class="card-text">{{ $p[0]->excerpt }}</p>
 
-                <p class="card-text"><small class="text-muted">{{ $p[0]->created_at->diffForHumans() }}</small></p>
+                <p class="card-text"><small class="text-muted">{{ $p[0]->created_at->diffForHumans() }}</small></p> {{-- diffForHumans nanti munculin waktu yg bisa dibaca manusia dah pokoknya --}}
                 <!-- Keren coyyy diffForHumans() -->
 
                 <a href="/post/{{ $p[0]->slug }}" class="text-decoration-none btn btn-primary">Read More</a>

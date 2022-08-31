@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id'); // foreign key yg connect ke table lain
+            $table->foreignId('category_id'); // foreign key yg connect ke table lain, dengan nama function_id, nanti laravel otomatis cari tables mana yang terconnect
             $table->foreignId('user_id');
             $table->string('title');
             $table->string('slug')->unique(); // unique = gaboleh sama satu sama lain
