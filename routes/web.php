@@ -95,4 +95,4 @@ Route::resource('/dashboard/posts', DashboardPostController::class)->middleware(
 
 // ->middleware('admin'), middleware ini udah update dari kernel.php, di kernel dinamain admin yang diambil dari middleware php artisan make:middleware IsAdmin
 // gapake middleware juga gapapa karena udah pake gate, GATE JAUH LEBIH FLEKSIBEL
-Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin'); // pengecualian untuk categories.show nya
+Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin'); // except = pengecualian untuk categories.show nya

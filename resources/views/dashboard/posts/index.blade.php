@@ -25,7 +25,7 @@
             <tbody>
                 @foreach ($posts as $post)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $loop->iteration }}</td> {{-- looping nomor --}}
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->category->name }}</td>
                         <td>

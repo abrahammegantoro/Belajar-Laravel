@@ -19,6 +19,7 @@ class IsAdmin
         // MASUKKIN MIDDLEWARE INI KE kernel.php
         // kalo pake gate, gaperlu pake auth()->check() karna udah login
         if(!auth()->check() || !auth()->user()->is_admin) { // guest artinya belum login, kalau user bukan admin
+            // auth->check = kalo user udah autentikasi/login, return true kalo udah login
             abort(403); // 403 itu forbidden
         }
         return $next($request);

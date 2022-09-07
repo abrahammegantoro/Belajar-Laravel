@@ -90,6 +90,6 @@
         <h1 class="text-center">No Post Found.</h1>
     @endif
 
-    {{ $p->links() }}
+    {{ $p->onEachSide(2)->links() }}
 
 @endsection
